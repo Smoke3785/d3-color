@@ -1,13 +1,5 @@
-import {readFileSync} from "fs";
 import {terser} from "rollup-plugin-terser";
 import * as meta from "./package.json";
-
-// Extract copyrights from the LICENSE.
-const copyright = readFileSync("./LICENSE", "utf-8")
-  .split(/\n/g)
-  .filter(line => /^Copyright\s+/.test(line))
-  .map(line => line.replace(/^Copyright\s+/, ""))
-  .join(", ");
 
 const config = {
   input: "src/index.js",
@@ -18,7 +10,7 @@ const config = {
     format: "umd",
     indent: false,
     extend: true,
-    banner: `// ${meta.homepage} v${meta.version} Copyright ${copyright}`,
+    banner: `// ${meta.homepage} v${meta.version} Copyright ${(new Date).getFullYear()} ${meta.author.name}`,
     globals: Object.assign({}, ...Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)).map(key => ({[key]: "d3"})))
   },
   plugins: []

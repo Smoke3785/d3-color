@@ -4,6 +4,11 @@
     "sourceType": "module",
     "ecmaVersion": 8
   },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
   "rules": {
     "no-cond-assign": 0
   }
